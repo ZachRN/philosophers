@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   basic_errors.c                                     :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: znajda <znajda@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/01 16:12:09 by znajda        #+#    #+#                 */
+/*   Updated: 2022/09/01 16:12:12 by znajda        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <structs.h>
 
 int	basic_error(int argc)
@@ -13,7 +25,14 @@ int	basic_error(int argc)
 	return (0);
 }
 
-int	input_error(int argc, char *argv[])
+void	write_error(char *str, int num);
 {
 
+}
+
+int	input_error(int argc, char *argv[], t_input *input)
+{
+	input->num_philos = philo_atoi(argv[1]);
+
+	return (1);
 }
