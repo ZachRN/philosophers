@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/01 16:12:09 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/01 16:12:12 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/01 19:28:45 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,12 +27,18 @@ int	basic_error(int argc)
 
 void	write_error(char *str, int num);
 {
+	if (num == -1)
+		printf("");
+	else if (num == -2)
+		printf("");
+	else if (num == -3)
+		printf("");
 
 }
 
 int	input_error(int argc, char *argv[], t_input *input)
 {
 	input->num_philos = philo_atoi(argv[1]);
-
+	if (input->num_philos <)
 	return (1);
 }
