@@ -4,7 +4,7 @@ VPATH := $(subst $(" "),:,$(shell find srcs -type d))
 SRCS += $(wildcard srcs/*.c srcs/*/*.c) 
 OBJ_FILES = $(addprefix $(BUILD_DIR)/, $(notdir $(patsubst %.c, %.o, $(SRCS))))
 HEADER_FILES := $(addprefix -I,$(shell find includes -type d -print))
-CFLAGS = -Wall -Wextra #-lreadline #-fsanitize=address -Werror
+CFLAGS = -Wall -Wextra #-fsanitize=address -Werror
 CC = gcc
 
 all: build_dir $(NAME)
@@ -15,7 +15,7 @@ $(NAME): $(OBJ_FILES)
 	@echo $(NAME) has been made!
 
 $(BUILD_DIR)/%.o: %.c
-	@$(CC) -c $(CFLAGS) -o $@ $<
+	@$(CC) $(HEADER_FILES) -c $(CFLAGS) -o $@ $<
 
 build_dir:
 	clear
@@ -24,6 +24,7 @@ build_dir:
 	else \
 	mkdir -p $(BUILD_DIR); \
 	fi
+
 clean:
 	clear
 	@echo Cleaning all object files 
