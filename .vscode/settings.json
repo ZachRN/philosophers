@@ -1,7 +1,0 @@
-{
-	"files.associations": {
-		"basic_errors.h": "c",
-		"structs.h": "c"
-	},
-	"C_Cpp.errorSquiggles": "Disabled"
-}
