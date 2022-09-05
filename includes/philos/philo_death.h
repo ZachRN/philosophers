@@ -1,6 +1,6 @@
 #ifndef PHILO_DEATH_H
 # define PHILO_DEATH_H
 
-int is_over(t_philo *philo);
+int	main_reaper(t_all *input);
 
 #endif

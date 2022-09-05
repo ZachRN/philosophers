@@ -5,56 +5,53 @@
 #include <philo_times.h>
 #include <philo_actions.h>
 
-static char	*color_define(int philo)
-{
-	int i;
+// static char	*color_define(int philo)
+// {
+// 	int i;
 
-	i = philo % 7;
-	if (i == 1)
-		return (RED);
-	else if (i == 2)
-		return (GREEN);
-	else if (i == 3)
-		return (YELLOW);
-	else if (i == 4)
-		return (BLUE);
-	else if (i == 5)
-		return (PURPLE);
-	else if (i == 6)
-		return (CYAN);
-	return (WHITE);
+// 	i = philo % 7;
+// 	if (i == 1)
+// 		return (RED);
+// 	else if (i == 2)
+// 		return (GREEN);
+// 	else if (i == 3)
+// 		return (YELLOW);
+// 	else if (i == 4)
+// 		return (BLUE);
+// 	else if (i == 5)
+// 		return (PURPLE);
+// 	else if (i == 6)
+// 		return (CYAN);
+// 	return (WHITE);
+// }
+
+static void	print_statement(int num, int state, size_t time)
+{
+	if (state == Eating)
+		printf("%zu %d is eating\n", time, num);
+	else if (state == Sleeping)
+		printf("%zu %d is sleeping\n", time, num);
+	else if (state == Grab_Fork)
+		printf("%zu %d has taken a fork\n", time, num);
+	else if (state == Thinking)
+		printf("%zu %d is thinking\n", time, num);
 }
 
-void	print_status(int num, t_philo *philo, int state, pthread_mutex_t *l)
+void	print_status(t_philo *philo, int state)
 {
-	char *color;
-	size_t time;
+	// char	*color;
+	size_t	time;
+	int		num;
 
+	num = philo->philo + 1;
 	time = current_time() - philo->main->start;
-	color = color_define(num);
-	pthread_mutex_lock(l);
+	// color = color_define(num);
+	pthread_mutex_lock(philo->main->m_print);
 	if (philo->main->finished != 0)
 	{
-		pthread_mutex_unlock(l);
+		pthread_mutex_unlock(philo->main->m_print);
 		return ;
 	}
-	if (state == Eating)
-		printf("%s%zu %d is eating\n", color, time, num);
-	else if (state == Sleeping)
-		printf("%s%zu %d is sleeping\n", color, time, num);
-	else if (state == Grab_Fork)
-		printf("%s%zu %d has taken a fork\n", color, time, num);
-	else if (state == Died)
-	{
-		printf("%s%zu %d died\n", color, time, num);
-		philo->main->finished++;
-	}
-	else if (state == Thinking)
-		printf("%s%zu %d is thinking\n", color, time, num);
-	else if (state == Over)
-	{
-		printf("%s%zu %d has eaten all meals\n", color, time, num);
-		philo->main->finished++;
-	}
-	pthread_mutex_unlock(l);
+	print_statement(num, state, time);
+	pthread_mutex_unlock(philo->main->m_print);
 }

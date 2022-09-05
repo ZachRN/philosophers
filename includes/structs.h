@@ -22,8 +22,10 @@ typedef struct s_philo
 	int				philo;
 	int				fork_left;
 	int				fork_right;
-	int				has_left;
-	int				has_right;
+	size_t			die;
+	size_t			eat;
+	size_t			sleep;
+	int				needed_meals;
 	int				meals;
 	size_t			last_meal;
 	struct s_all	*main;
@@ -32,17 +34,18 @@ typedef struct s_philo
 typedef struct s_all
 {
 	int		num_philos;
-	size_t		die;
-	size_t		eat;
-	size_t		sleep;
+	int		die;
+	int		eat;
+	int		sleep;
 	int		meals;
 	int		*forks;
 	int		finished;
 	size_t	start;
 	t_philo	*philo;
-	pthread_mutex_t *check;
-	pthread_mutex_t *dead;
-	pthread_mutex_t *print;
+	pthread_mutex_t *m_forks;
+	pthread_mutex_t *m_check;
+	pthread_mutex_t *m_dead;
+	pthread_mutex_t *m_print;
 }				t_all;
 
 #endif

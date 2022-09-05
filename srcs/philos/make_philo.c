@@ -3,6 +3,7 @@
 #include <basic_errors.h>
 #include <philo_times.h>
 #include <philo_actions.h>
+#include <philo_death.h>
 
 #include <stdio.h>
 
@@ -13,31 +14,15 @@ t_philo	assign_philo_start(t_all *input, int i)
 	to_return.philo = i;
 	to_return.fork_left = i;
 	to_return.fork_right = (i + 1) % input->num_philos;
-	to_return.has_left = 0;
-	to_return.has_right = 0;
+	to_return.die = input->die;
+	to_return.eat = input->eat;
+	to_return.sleep = input->sleep;
 	to_return.meals = 0;
-	to_return.last_meal = 0;
+	to_return.needed_meals = input->meals;
 	to_return.main = input;
 	return (to_return);
 }
 
-int	init_mutexs(t_all *input)
-{
-	input->check = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
-	input->dead = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
-	input->print = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
-	if (!input->check || !input->dead || !input->print)
-	{
-		free(input->check);
-		free(input->dead);
-		free(input->print);
-		return (FAILURE);
-	}
-	pthread_mutex_init(input->check, NULL);
-	pthread_mutex_init(input->dead, NULL);
-	pthread_mutex_init(input->print, NULL);
-	return (SUCCESS);
-}
 
 int	init_philos(t_all *input)
 {
@@ -79,6 +64,7 @@ int	launch_threads(t_all *input)
 		i++;
 	}
 	i = 0;
+	// main_reaper(input);
 	while (i < input->num_philos)
 	{
 		error = pthread_join(id[i], NULL);

@@ -13,16 +13,13 @@ size_t my_sleep(size_t miliseconds)
 {
 	size_t end_time;
 	size_t start_time;
-	struct timeval tv;
 
-	gettimeofday(&tv, NULL);
-	start_time = ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+	start_time = current_time();
 	end_time = start_time;
-	while (end_time - start_time < miliseconds)
+	while (end_time - start_time <= miliseconds)
 	{
-		usleep(miliseconds/1000);
-		gettimeofday(&tv, NULL);
-		end_time = ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+		usleep(miliseconds);
+		end_time = current_time();
 	}
 	return (end_time - start_time);
 }

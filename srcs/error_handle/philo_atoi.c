@@ -1,14 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   philo_itoa.c                                       :+:    :+:            */
+/*   philo_atoi.c                                       :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/01 15:57:54 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/01 16:04:22 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/05 14:07:43 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <basic_errors.h>
+#include <limits.h>
 
 static int	is_num(char c)
 {
@@ -33,8 +36,8 @@ int	philo_atoi(char *str)
 		if (error < 0)
 			return (error);
 		num = (num  * 10) + (str[i] - '0');
-		if (num > 2147483647)
-			return (-3);
+		if (num > INT_MAX)
+			return (BIG_INT);
 		i++;
 	}
 	return ((int)(num));

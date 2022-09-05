@@ -5,6 +5,6 @@
 #include <pthread.h>
 #include <structs.h>
 
-void	print_status(int num, t_philo *philo, int state, pthread_mutex_t *l);
+void	print_status(t_philo *philo, int state);
 
 #endif
