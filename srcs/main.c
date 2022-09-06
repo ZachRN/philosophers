@@ -1,11 +1,28 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   main.c                                             :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: znajda <znajda@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/06 14:36:20 by znajda        #+#    #+#                 */
+/*   Updated: 2022/09/06 17:32:09 by znajda        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <structs.h>
 #include <init_mutexs.h>
+#include <input_parse.h>
+#include <init_philos.h>
+#include <launch_threads.h>
+#include <stdlib.h>
 
+#include <stdio.h>
 int	program_clean_up(t_mutexs *mutexs, t_philo *philo, int ret_val, int philos)
 {
 	pthread_mutex_destroy(&mutexs->non_malloc[print]);
 	pthread_mutex_destroy(&mutexs->non_malloc[death]);
-	lock_clean_up(mutexs->forks, philos);
+	lock_clean_up(mutexs, philos);
 	free(philo);
 	return (ret_val);
 }
@@ -20,10 +37,11 @@ int	main(int argc, char *argv[])
 		return (FAILURE);
 	if (init_shared_mutexs(input, &mutexs) == FAILURE)
 		return (FAILURE);
+	// printf("num:%d\ntteat:%d\nttdie:%d\nttsleep:%d\n", input.num_philos, input.tt_eat, input.tt_die, input.tt_sleep);
 	philo = init_philos(input, &mutexs);
 	if (!philo)
-		return program_clean_up(&mutexs, philo, FAILURE, input.num_philos);
-	if (launch_threads(philo) == FAILURE)
+		return (program_clean_up(&mutexs, philo, FAILURE, input.num_philos));
+	if (launch_threads(philo, input) == FAILURE)
 		return program_clean_up(&mutexs, philo, FAILURE, input.num_philos);
 	return program_clean_up(&mutexs, philo, SUCCESS, input.num_philos);
 }

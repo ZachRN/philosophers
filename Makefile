@@ -4,8 +4,15 @@ VPATH := $(subst $(" "),:,$(shell find srcs -type d))
 SRCS += $(wildcard srcs/*.c srcs/*/*.c) 
 OBJ_FILES = $(addprefix $(BUILD_DIR)/, $(notdir $(patsubst %.c, %.o, $(SRCS))))
 HEADER_FILES := $(addprefix -I,$(shell find includes -type d -print))
-CFLAGS = -Wall -Wextra -Werror -g -fsanitize=thread
+CFLAGS = -Wall -Wextra -Werror
 CC = gcc
+
+DEBUG ?= 0
+ifeq ($(DEBUG), 1)
+    CFLAGS =-DDEBUG
+else
+    CFLAGS=-DNDEBUG
+endif
 
 all: build_dir $(NAME)
 

@@ -1,8 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   init_mutexs.h                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: znajda <znajda@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/06 14:48:43 by znajda        #+#    #+#                 */
+/*   Updated: 2022/09/06 14:48:44 by znajda        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef INIT_MUTEXS_H
 # define INIT_MUTEXS_H
 
 # include <structs.h>
-
 
 /*This function cleans all the mutexs within mutexs->fork as that has mutexs
 equal to the number of philosophers entered into the program, this function has

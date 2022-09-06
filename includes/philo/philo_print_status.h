@@ -1,24 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   colors.h                                           :+:    :+:            */
+/*   philo_print_status.h                               :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
-/*   Created: 2022/09/06 14:36:45 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/06 14:36:52 by znajda        ########   odam.nl         */
+/*   Created: 2022/09/06 14:47:56 by znajda        #+#    #+#                 */
+/*   Updated: 2022/09/06 15:20:23 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COLORS_H
-# define COLORS_H
+#ifndef PHILO_PRINT_STATUS_H
+# define PHILO_PRINT_STATUS_H
 
-# define RED        "\x1B[1;31m"
-# define GREEN      "\x1B[1;32m"
-# define YELLOW     "\x1B[1;33m"
-# define BLUE       "\x1B[1;34m"
-# define PURPLE     "\x1B[1;35m"
-# define WHITE      "\x1B[97m"
-# define CYAN       "\x1b[1;36m"
+# include <structs.h>
+
+void	print_status(t_philo *philo, int state);
 
 #endif

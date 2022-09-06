@@ -1,12 +1,15 @@
 #include <structs.h>
 #include <time_utils.h>
 #include <colors.h>
+#include <stdio.h>
 
 static char	*color_define(int philo)
 {
 	int i;
 
 	i = philo % 7;
+	if (DEBUG == TRUE)
+		return ("\0");
 	if (i == 1)
 		return (RED);
 	else if (i == 2)
@@ -22,23 +25,25 @@ static char	*color_define(int philo)
 	return (WHITE);
 }
 
-void	print_status(int philo_nbr, int state, size_t start, t_mutexs *mutexs)
+void	print_status(t_philo *philo, int state)
 {
 	size_t	time;
+	int		philo_nbr;
 	char	*color;
 
-	time = time_in_ms() - start;
+	philo_nbr = philo->philo_nbr + 1;
+	pthread_mutex_lock(&philo->mutexs->non_malloc[print]);
 	color = color_define(philo_nbr);
-	pthread_mutex_lock(&mutexs->non_malloc[print]);
+	time = time_in_ms() - philo->program_start;
 	if (state == Eating)
 		printf("%s%zu %d is eating\n", color, time, philo_nbr);
 	else if (state == Sleeping)
 		printf("%s%zu %d is sleeping\n", color, time, philo_nbr);
-	else if (state == Grab_Fork)
+	else if (state == Fork)
 		printf("%s%zu %d has taken a fork\n", color, time, philo_nbr);
 	else if (state == Thinking)
 		printf("%s%zu %d is thinking\n", color, time, philo_nbr);
 	else if (state == Dying)
-		printf("%s%zu %d has died\n", color, time, philo_nbr);
-	pthread_mutex_unlock(&mutexs->non_malloc[print]);
+		printf("%s%zu %d died\n", color, time, philo_nbr);
+	pthread_mutex_unlock(&philo->mutexs->non_malloc[print]);
 }

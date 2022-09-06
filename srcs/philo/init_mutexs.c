@@ -31,11 +31,11 @@ static int	init_fork_mutexs(t_input input, t_mutexs *mutexs)
 		return (FAILURE);
 	}
 	i = 0;
-	while (i < input.num_philos);
+	while (i < input.num_philos)
 	{
 		error = pthread_mutex_init(&mutexs->forks[i], NULL);
 		if (error != SUCCESS)
-			return lock_clean_up(mutexs, i);
+			return (lock_clean_up(mutexs, i));
 		i++;
 	}
 	return (SUCCESS);
@@ -51,7 +51,7 @@ int	init_shared_mutexs(t_input input, t_mutexs *mutexs)
 		print_input_errors(NULL, Lock_Error);
 		return (FAILURE);
 	}
-	error = pthread_mutex_int(&mutexs->non_malloc[death], NULL);
+	error = pthread_mutex_init(&mutexs->non_malloc[death], NULL);
 	if (error != SUCCESS)
 	{
 		print_input_errors(NULL, Lock_Error);

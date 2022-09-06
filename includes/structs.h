@@ -1,7 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   structs.h                                          :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: znajda <znajda@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/06 14:38:18 by znajda        #+#    #+#                 */
+/*   Updated: 2022/09/06 17:54:33 by znajda        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef STRUCTS_H
 # define STRUCTS_H
 
 # include <pthread.h>
+
+#ifndef DEBUG
+# define DEBUG 0
+#endif
 
 # define TRUE 1
 # define FALSE 0
@@ -16,7 +32,7 @@ enum e_states
 	Eating = 1,
 	Sleeping,
 	Thinking,
-	Grab_Fork,
+	Fork,
 	Dying
 };
 

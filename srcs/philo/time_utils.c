@@ -18,7 +18,7 @@ void	my_sleep(size_t miliseconds)
 	end_time = start_time;
 	while (end_time - start_time < miliseconds)
 	{
-		usleep(1000);
-		end_time = time_in_ms;
+		usleep(100);
+		end_time = time_in_ms();
 	}
 }
