@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 13:20:12 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/07 13:20:15 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/07 15:21:07 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	is_over(t_philo *philo, int state)
 int	philo_eat(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->mutexs->forks[philo->left_fork]);
-	if (is_over(philo, Fork) == TRUE)
+	if (is_over(philo, Fork) == TRUE || philo->left_fork == philo->right_fork)
 	{
 		pthread_mutex_unlock(&philo->mutexs->forks[philo->left_fork]);
 		return (FALSE);
