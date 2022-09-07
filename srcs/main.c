@@ -37,7 +37,6 @@ int	main(int argc, char *argv[])
 		return (FAILURE);
 	if (init_shared_mutexs(input, &mutexs) == FAILURE)
 		return (FAILURE);
-	// printf("num:%d\ntteat:%d\nttdie:%d\nttsleep:%d\n", input.num_philos, input.tt_eat, input.tt_die, input.tt_sleep);
 	philo = init_philos(input, &mutexs);
 	if (!philo)
 		return (program_clean_up(&mutexs, philo, FAILURE, input.num_philos));

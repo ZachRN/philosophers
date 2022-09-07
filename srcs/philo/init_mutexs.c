@@ -45,6 +45,7 @@ int	init_shared_mutexs(t_input input, t_mutexs *mutexs)
 {
 	int	error;
 
+	mutexs->has_finished = 0;
 	error = pthread_mutex_init(&mutexs->non_malloc[print], NULL);
 	if (error != SUCCESS)
 	{

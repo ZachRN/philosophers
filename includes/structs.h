@@ -95,10 +95,11 @@ typedef struct s_philo
 	int			philo_nbr;
 	int			left_fork;
 	int			right_fork;
+	int			has_eaten;
+	int			t_meals;
 	size_t		tt_die;
 	size_t		tt_sleep;
 	size_t		tt_eat;
-	size_t		min_meals;
 	size_t		last_eat;
 	size_t		program_start;
 	t_mutexs	*mutexs;

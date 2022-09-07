@@ -15,7 +15,8 @@ t_philo	make_philo(t_input input, t_mutexs *mutexs, int philo_n, size_t time)
 	to_return.tt_eat = (size_t)input.tt_eat;
 	to_return.tt_die = (size_t)input.tt_die;
 	to_return.tt_sleep = (size_t)input.tt_sleep;
-	to_return.min_meals = (size_t)input.min_meals;
+	to_return.has_eaten = 0;
+	to_return.t_meals = input.min_meals;
 	to_return.mutexs = mutexs;
 	to_return.program_start = time;
 	to_return.last_eat = time;

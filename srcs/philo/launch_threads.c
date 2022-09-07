@@ -7,11 +7,12 @@
 
 #include <stdio.h>
 
-void	await_thread_deaths(t_input input, pthread_t *id)
+void	await_thread_deaths(t_input input, pthread_t *id, t_philo *philo)
 {
 	int i;
 
 	i = 0;
+	pthread_mutex_unlock(&philo[0].mutexs->non_malloc[death]);
 	while (i < input.num_philos)
 	{
 		pthread_join(id[i], NULL);
@@ -37,7 +38,7 @@ void	grim_reaper(t_philo *philos, pthread_t *id, t_input input)
 			{
 				philos[i].mutexs->has_finished++;
 				print_status(&philos[i], Dying);
-				return (void)(await_thread_deaths(input, id));
+				return (void)(await_thread_deaths(input, id, philos));
 			}
 			pthread_mutex_unlock(&philos[i].mutexs->non_malloc[death]);
 			i++;

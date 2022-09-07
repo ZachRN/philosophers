@@ -43,6 +43,7 @@ int		philo_eat(t_philo *philo)
 	pthread_mutex_unlock(&philo->mutexs->forks[philo->right_fork]);
 	pthread_mutex_lock(&philo->mutexs->non_malloc[death]);
 	philo->last_eat = time_in_ms();
+	philo->has_eaten++;
 	pthread_mutex_unlock(&philo->mutexs->non_malloc[death]);
 	return (TRUE);
 }
