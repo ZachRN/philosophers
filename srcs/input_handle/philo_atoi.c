@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   philo_atoi.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: znajda <znajda@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/07 13:23:38 by znajda        #+#    #+#                 */
+/*   Updated: 2022/09/07 13:23:39 by znajda        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <structs.h>
 #include <limits.h>
 
@@ -18,12 +30,12 @@ int	philo_atoi(char *str)
 
 	i = 0;
 	num = 0;
-	while(str[i])
+	while (str[i])
 	{
 		error = is_num(str[i]);
 		if (error < 0)
 			return (error);
-		num = (num  * 10) + (str[i] - '0');
+		num = (num * 10) + (str[i] - '0');
 		if (num > INT_MAX)
 			return (Too_Big);
 		i++;

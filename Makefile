@@ -5,6 +5,7 @@ SRCS += $(wildcard srcs/*.c srcs/*/*.c)
 OBJ_FILES = $(addprefix $(BUILD_DIR)/, $(notdir $(patsubst %.c, %.o, $(SRCS))))
 HEADER_FILES := $(addprefix -I,$(shell find includes -type d -print))
 CFLAGS = -Wall -Wextra -Werror
+# -g -fsanitize=thread -g -fsanitize=address
 CC = gcc
 
 DEBUG ?= 0

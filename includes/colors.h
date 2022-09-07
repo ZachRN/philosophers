@@ -6,12 +6,14 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/06 14:36:45 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/06 14:36:52 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/07 13:28:50 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef COLORS_H
 # define COLORS_H
+
+/*These are just defines to use for colors for printf*/
 
 # define RED        "\x1B[1;31m"
 # define GREEN      "\x1B[1;32m"

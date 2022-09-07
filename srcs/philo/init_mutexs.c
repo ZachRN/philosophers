@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   init_mutexs.c                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: znajda <znajda@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/07 13:22:57 by znajda        #+#    #+#                 */
+/*   Updated: 2022/09/07 13:59:38 by znajda        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <structs.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -5,7 +17,7 @@
 
 int	lock_clean_up(t_mutexs *mutexs, int clean_to)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < clean_to)
@@ -19,8 +31,8 @@ int	lock_clean_up(t_mutexs *mutexs, int clean_to)
 
 static int	init_fork_mutexs(t_input input, t_mutexs *mutexs)
 {
-	int i;
-	int error;
+	int	i;
+	int	error;
 
 	mutexs->forks = malloc(sizeof(pthread_mutex_t) * input.num_philos);
 	if (!mutexs->forks)
@@ -35,7 +47,10 @@ static int	init_fork_mutexs(t_input input, t_mutexs *mutexs)
 	{
 		error = pthread_mutex_init(&mutexs->forks[i], NULL);
 		if (error != SUCCESS)
+		{
+			print_input_errors(NULL, Lock_Error);
 			return (lock_clean_up(mutexs, i));
+		}
 		i++;
 	}
 	return (SUCCESS);
@@ -46,6 +61,7 @@ int	init_shared_mutexs(t_input input, t_mutexs *mutexs)
 	int	error;
 
 	mutexs->has_finished = 0;
+	mutexs->total_finished = 0;
 	error = pthread_mutex_init(&mutexs->non_malloc[print], NULL);
 	if (error != SUCCESS)
 	{

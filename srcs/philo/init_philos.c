@@ -1,13 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   init_philos.c                                      :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: znajda <znajda@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/07 13:22:35 by znajda        #+#    #+#                 */
+/*   Updated: 2022/09/07 13:22:35 by znajda        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <structs.h>
 #include <input_parse.h>
 #include <time_utils.h>
 #include <stdlib.h>
 
-
-#include <stdio.h>
 t_philo	make_philo(t_input input, t_mutexs *mutexs, int philo_n, size_t time)
 {
-	t_philo to_return;
+	t_philo	to_return;
 
 	to_return.philo_nbr = philo_n;
 	to_return.left_fork = philo_n;
@@ -23,10 +33,10 @@ t_philo	make_philo(t_input input, t_mutexs *mutexs, int philo_n, size_t time)
 	return (to_return);
 }
 
-t_philo *init_philos(t_input input, t_mutexs *mutexs)
+t_philo	*init_philos(t_input input, t_mutexs *mutexs)
 {
 	int		i;
-	t_philo *philos;
+	t_philo	*philos;
 	size_t	time;
 
 	philos = malloc(sizeof(t_philo) * input.num_philos);
@@ -36,7 +46,7 @@ t_philo *init_philos(t_input input, t_mutexs *mutexs)
 		return (NULL);
 	}
 	i = 0;
-	time = time_in_ms(); 
+	time = time_in_ms();
 	while (i < input.num_philos)
 	{
 		philos[i] = make_philo(input, mutexs, i, time);

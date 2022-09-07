@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/06 14:36:20 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/06 17:32:09 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/07 14:00:46 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 #include <launch_threads.h>
 #include <stdlib.h>
 
-#include <stdio.h>
 int	program_clean_up(t_mutexs *mutexs, t_philo *philo, int ret_val, int philos)
 {
 	pthread_mutex_destroy(&mutexs->non_malloc[print]);
@@ -41,7 +40,6 @@ int	main(int argc, char *argv[])
 	if (!philo)
 		return (program_clean_up(&mutexs, philo, FAILURE, input.num_philos));
 	if (launch_threads(philo, input) == FAILURE)
-		return program_clean_up(&mutexs, philo, FAILURE, input.num_philos);
-	return program_clean_up(&mutexs, philo, SUCCESS, input.num_philos);
+		return (program_clean_up(&mutexs, philo, FAILURE, input.num_philos));
+	return (program_clean_up(&mutexs, philo, SUCCESS, input.num_philos));
 }
-	

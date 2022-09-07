@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   philo_print_status.c                               :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: znajda <znajda@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/07 13:18:17 by znajda        #+#    #+#                 */
+/*   Updated: 2022/09/07 13:18:17 by znajda        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <structs.h>
 #include <time_utils.h>
 #include <colors.h>
@@ -5,7 +17,7 @@
 
 static char	*color_define(int philo)
 {
-	int i;
+	int	i;
 
 	i = philo % 7;
 	if (DEBUG == TRUE)

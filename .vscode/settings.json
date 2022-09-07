@@ -1,7 +1,0 @@
-{
-	"files.associations": {
-		"time_utils.h": "c",
-		"philo_print_status.h": "c",
-		"pthread.h": "c"
-	}
-}

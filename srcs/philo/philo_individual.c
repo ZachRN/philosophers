@@ -1,10 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   philo_individual.c                                 :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: znajda <znajda@student.codam.nl>             +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2022/09/07 13:20:12 by znajda        #+#    #+#                 */
+/*   Updated: 2022/09/07 13:20:15 by znajda        ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <structs.h>
 #include <time_utils.h>
 #include <philo_print_status.h>
 
-#include <stdio.h>
-
-int		is_over(t_philo *philo, int state)
+int	is_over(t_philo *philo, int state)
 {
 	pthread_mutex_lock(&philo->mutexs->non_malloc[death]);
 	if (philo->mutexs->has_finished != 0)
@@ -17,7 +27,7 @@ int		is_over(t_philo *philo, int state)
 	return (FALSE);
 }
 
-int		philo_eat(t_philo *philo)
+int	philo_eat(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->mutexs->forks[philo->left_fork]);
 	if (is_over(philo, Fork) == TRUE)
@@ -26,29 +36,23 @@ int		philo_eat(t_philo *philo)
 		return (FALSE);
 	}
 	pthread_mutex_lock(&philo->mutexs->forks[philo->right_fork]);
-	if (is_over(philo, Fork) == TRUE)
+	if (is_over(philo, Fork) == TRUE || is_over(philo, Eating) == TRUE)
 	{
 		pthread_mutex_unlock(&philo->mutexs->forks[philo->left_fork]);
 		pthread_mutex_unlock(&philo->mutexs->forks[philo->right_fork]);
 		return (FALSE);
 	}
-	if (is_over(philo, Eating) == TRUE)
-	{
-		pthread_mutex_unlock(&philo->mutexs->forks[philo->left_fork]);
-		pthread_mutex_unlock(&philo->mutexs->forks[philo->right_fork]);
-		return (FALSE);
-	}
-	my_sleep(philo->tt_eat);
-	pthread_mutex_unlock(&philo->mutexs->forks[philo->left_fork]);
-	pthread_mutex_unlock(&philo->mutexs->forks[philo->right_fork]);
 	pthread_mutex_lock(&philo->mutexs->non_malloc[death]);
 	philo->last_eat = time_in_ms();
 	philo->has_eaten++;
 	pthread_mutex_unlock(&philo->mutexs->non_malloc[death]);
+	my_sleep(philo->tt_eat);
+	pthread_mutex_unlock(&philo->mutexs->forks[philo->left_fork]);
+	pthread_mutex_unlock(&philo->mutexs->forks[philo->right_fork]);
 	return (TRUE);
 }
 
-int		philo_sleep_think(t_philo *philo)
+int	philo_sleep_think(t_philo *philo)
 {
 	if (is_over(philo, Sleeping) == TRUE)
 		return (FALSE);
@@ -71,8 +75,8 @@ void	philo_actions(t_philo *philo)
 
 void	*individual(void *content)
 {
-	t_philo *philo;
-	
+	t_philo	*philo;
+
 	philo = (t_philo *)content;
 	pthread_mutex_lock(&philo->mutexs->non_malloc[death]);
 	philo->last_eat = time_in_ms();
