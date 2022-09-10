@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 13:21:47 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/07 14:00:24 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/10 14:52:43 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,23 +37,11 @@ int	check_death_states(t_philo *philos, int i, int num_philos)
 	size_t	time;
 
 	time = time_in_ms();
-	if (philos[i].has_eaten == philos[i].t_meals)
-	{
-		philos[i].mutexs->total_finished++;
-		philos[i].has_eaten++;
-	}
-	else if (philos[i].mutexs->total_finished == num_philos)
-	{
-		philos[i].mutexs->has_finished++;
-		print_status(&philos[i], Eating);
-		pthread_mutex_unlock(&philos[i].mutexs->non_malloc[death]);
-		return (TRUE);
-	}
 	if (time >= philos[i].last_eat
 		&& time - philos[i].last_eat > philos[i].tt_die)
 	{
-		philos[i].mutexs->has_finished++;
 		print_status(&philos[i], Dying);
+		philos[i].mutexs->has_finished++;
 		pthread_mutex_unlock(&philos[i].mutexs->non_malloc[death]);
 		return (TRUE);
 	}
@@ -77,7 +65,7 @@ void	grim_reaper(t_philo *philos, pthread_t *id, t_input input)
 			pthread_mutex_unlock(&philos[i].mutexs->non_malloc[death]);
 			i++;
 		}
-		my_sleep(5);
+		my_sleep(2);
 	}
 }
 

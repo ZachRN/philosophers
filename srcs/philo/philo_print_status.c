@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 13:18:17 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/07 13:18:17 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/10 14:31:46 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,19 @@ static char	*color_define(int philo)
 	return (WHITE);
 }
 
+int	only_one_philo(t_input input)
+{
+	char	*color;
+
+	if (input.num_philos != 1)
+		return (FALSE);
+	color = color_define(1);
+	printf("%s%d %d has taken a fork\n", color, 0, 1);
+	my_sleep(input.tt_die);
+	printf("%s%d %d died\n", color, input.tt_die, 1);
+	return (TRUE);
+}
+
 void	print_status(t_philo *philo, int state)
 {
 	size_t	time;
@@ -45,6 +58,11 @@ void	print_status(t_philo *philo, int state)
 
 	philo_nbr = philo->philo_nbr + 1;
 	pthread_mutex_lock(&philo->mutexs->non_malloc[print]);
+	if (philo->mutexs->has_finished != 0)
+	{
+		pthread_mutex_unlock(&philo->mutexs->non_malloc[print]);
+		return ;
+	}
 	color = color_define(philo_nbr);
 	time = time_in_ms() - philo->program_start;
 	if (state == Eating)

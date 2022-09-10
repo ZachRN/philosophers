@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 13:23:38 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/07 13:23:39 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/10 14:23:49 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,5 +40,7 @@ int	philo_atoi(char *str)
 			return (Too_Big);
 		i++;
 	}
+	if (num == 0)
+		return (Too_Small);
 	return ((int)(num));
 }

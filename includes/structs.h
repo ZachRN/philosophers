@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/06 14:38:18 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/07 13:41:32 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/10 14:39:08 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ typedef struct s_mutexs
 {
 	int				has_finished;
 	int				total_finished;
+	int				num_philos;
 	pthread_mutex_t	non_malloc[2];
 	pthread_mutex_t	*forks;
 }				t_mutexs;

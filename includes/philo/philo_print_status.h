@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/06 14:47:56 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/07 13:31:14 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/10 14:16:15 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,7 @@ make DEBUG=1
 */
 
 void	print_status(t_philo *philo, int state);
+
+int	only_one_philo(t_input input);
 
 #endif

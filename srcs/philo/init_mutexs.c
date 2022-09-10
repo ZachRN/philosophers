@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 13:22:57 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/07 13:59:38 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/10 14:39:22 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	init_shared_mutexs(t_input input, t_mutexs *mutexs)
 
 	mutexs->has_finished = 0;
 	mutexs->total_finished = 0;
+	mutexs->num_philos = input.num_philos;
 	error = pthread_mutex_init(&mutexs->non_malloc[print], NULL);
 	if (error != SUCCESS)
 	{

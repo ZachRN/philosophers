@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 13:20:12 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/07 15:21:07 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/10 14:40:23 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,22 @@ int	is_over(t_philo *philo, int state)
 	return (FALSE);
 }
 
+void	meal_increase(t_philo *philo)
+{
+	philo->has_eaten++;
+	if (philo->has_eaten == philo->t_meals)
+	{
+		philo->mutexs->total_finished++;
+		philo->has_eaten++;
+	}
+	if (philo->mutexs->total_finished == philo->mutexs->num_philos)
+		philo->mutexs->has_finished++;
+}
+
 int	philo_eat(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->mutexs->forks[philo->left_fork]);
-	if (is_over(philo, Fork) == TRUE || philo->left_fork == philo->right_fork)
+	if (is_over(philo, Fork) == TRUE)
 	{
 		pthread_mutex_unlock(&philo->mutexs->forks[philo->left_fork]);
 		return (FALSE);
@@ -44,7 +56,7 @@ int	philo_eat(t_philo *philo)
 	}
 	pthread_mutex_lock(&philo->mutexs->non_malloc[death]);
 	philo->last_eat = time_in_ms();
-	philo->has_eaten++;
+	meal_increase(philo);
 	pthread_mutex_unlock(&philo->mutexs->non_malloc[death]);
 	my_sleep(philo->tt_eat);
 	pthread_mutex_unlock(&philo->mutexs->forks[philo->left_fork]);
@@ -62,17 +74,6 @@ int	philo_sleep_think(t_philo *philo)
 	return (TRUE);
 }
 
-void	philo_actions(t_philo *philo)
-{
-	while (1)
-	{
-		if (philo_eat(philo) == FALSE)
-			return ;
-		else if (philo_sleep_think(philo) == FALSE)
-			return ;
-	}
-}
-
 void	*individual(void *content)
 {
 	t_philo	*philo;
@@ -83,6 +84,12 @@ void	*individual(void *content)
 	pthread_mutex_unlock(&philo->mutexs->non_malloc[death]);
 	if (philo->philo_nbr % 2 == 0)
 		my_sleep(5);
-	philo_actions(philo);
+	while (1)
+	{
+		if (philo_eat(philo) == FALSE)
+			break ;
+		else if (philo_sleep_think(philo) == FALSE)
+			break ;
+	}
 	return (NULL);
 }
