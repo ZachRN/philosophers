@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/06 14:36:20 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/10 14:54:32 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/12 17:49:35 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	main(int argc, char *argv[])
 	t_input		input;
 	t_mutexs	mutexs;
 	t_philo		*philo;
-	
+
 	if (input_parse(argc, argv, &input) == FAILURE)
 		return (FAILURE);
 	if (only_one_philo(input) == TRUE)

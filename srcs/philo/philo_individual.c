@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/07 13:20:12 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/10 14:40:23 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/12 15:34:38 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,20 +23,17 @@ int	is_over(t_philo *philo, int state)
 		return (TRUE);
 	}
 	print_status(philo, state);
-	pthread_mutex_unlock(&philo->mutexs->non_malloc[death]);
-	return (FALSE);
-}
-
-void	meal_increase(t_philo *philo)
-{
-	philo->has_eaten++;
-	if (philo->has_eaten == philo->t_meals)
+	if (state == Eating)
+		philo->has_eaten++;
+	if (philo->has_eaten == philo->t_meals && philo->t_meals != -1)
 	{
 		philo->mutexs->total_finished++;
 		philo->has_eaten++;
 	}
 	if (philo->mutexs->total_finished == philo->mutexs->num_philos)
 		philo->mutexs->has_finished++;
+	pthread_mutex_unlock(&philo->mutexs->non_malloc[death]);
+	return (FALSE);
 }
 
 int	philo_eat(t_philo *philo)
@@ -56,7 +53,6 @@ int	philo_eat(t_philo *philo)
 	}
 	pthread_mutex_lock(&philo->mutexs->non_malloc[death]);
 	philo->last_eat = time_in_ms();
-	meal_increase(philo);
 	pthread_mutex_unlock(&philo->mutexs->non_malloc[death]);
 	my_sleep(philo->tt_eat);
 	pthread_mutex_unlock(&philo->mutexs->forks[philo->left_fork]);

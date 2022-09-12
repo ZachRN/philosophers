@@ -6,7 +6,7 @@
 /*   By: znajda <znajda@student.codam.nl>             +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2022/09/06 14:47:56 by znajda        #+#    #+#                 */
-/*   Updated: 2022/09/10 14:16:15 by znajda        ########   odam.nl         */
+/*   Updated: 2022/09/12 17:50:12 by znajda        ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@ make DEBUG=1
 
 void	print_status(t_philo *philo, int state);
 
-int	only_one_philo(t_input input);
+/*This is just the edge case for killin a single philo after x amount
+of time to die*/
+
+int		only_one_philo(t_input input);
 
 #endif
